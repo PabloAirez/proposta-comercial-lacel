@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta Comercial - Grupo Lacel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%);
+            color: #0a0e27;
+            border: none;
+            padding: 18px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(253, 183, 26, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(253, 183, 26, 0.6);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(253, 183, 26, 0.03) 49%, rgba(253, 183, 26, 0.03) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(253, 183, 26, 0.03) 49%, rgba(253, 183, 26, 0.03) 51%, transparent 52%);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 60px 60px, -60px 60px; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 40px;
+        }
+
+        .logo-container {
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-container img {
+            height: 80px;
+            filter: drop-shadow(0 10px 30px rgba(253, 183, 26, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: #FDB71A;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5em;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 900;
+            color: #FDB71A;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid #FDB71A;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #FDB71A;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes scrollDot {
+            0% { transform: translateX(-50%) translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+        }
+
+        /* CONTENT SECTIONS */
+        .content-wrapper {
+            background: #ffffff;
+        }
+
+        .section {
+            padding: 120px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-dark {
+            background: #0a0e27;
+            color: #ffffff;
+        }
+
+        .section-gray {
+            background: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 0.9em;
+            color: #FDB71A;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 3em;
+            font-weight: 900;
+            color: #0a0e27;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-dark .section-title {
+            color: #ffffff;
+        }
+
+        .section-description {
+            font-size: 1.2em;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .section-dark .section-description {
+            color: #a0a0a0;
+        }
+
+        /* FEATURE GRID */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-dark .feature-card {
+            background: #1a1f3a;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FDB71A, #f59e0b);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #0a0e27;
+            margin-bottom: 15px;
+        }
+
+        .section-dark .feature-title {
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .section-dark .feature-description {
+            color: #a0a0a0;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #FDB71A, #f59e0b);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-left: 50%;
+            padding-right: 0;
+        }
+
+        .timeline-content {
+            background: #1a1f3a;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(253, 183, 26, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 35px;
+            width: 20px;
+            height: 20px;
+            background: #FDB71A;
+            border: 4px solid #0a0e27;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-phase {
+            color: #FDB71A;
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            color: #ffffff;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-duration {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* PRICE SECTION */
+        .price-showcase {
+            background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%);
+            border-radius: 30px;
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(253, 183, 26, 0.4);
+        }
+
+        .price-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .price-label {
+            font-size: 1.2em;
+            color: #0a0e27;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .price-value {
+            font-size: 6em;
+            font-weight: 900;
+            color: #0a0e27;
+            line-height: 1;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-description {
+            font-size: 1.3em;
+            color: #0a0e27;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .price-feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .price-feature-text {
+            color: #0a0e27;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        /* INCLUDES LIST */
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 60px 0;
+        }
+
+        .include-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #FDB71A;
+        }
+
+        .include-item:hover {
+            background: #ffffff;
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .include-check {
+            font-size: 1.5em;
+            color: #FDB71A;
+            font-weight: bold;
+        }
+
+        .include-text {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            padding: 100px 60px;
+            text-align: center;
+            border-radius: 30px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(253, 183, 26, 0.05) 49%, rgba(253, 183, 26, 0.05) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(253, 183, 26, 0.05) 49%, rgba(253, 183, 26, 0.05) 51%, transparent 52%);
+            background-size: 40px 40px;
+        }
+
+        .cta-title {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-description {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-highlight {
+            font-size: 1.5em;
+            color: #FDB71A;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0a0e27;
+            color: #888;
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid #1a1f3a;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .footer-highlight {
+            color: #FDB71A;
+            font-weight: 600;
+        }
+
+        /* LOADING */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .spinner {
+            border: 5px solid #1a1f3a;
+            border-top: 5px solid #FDB71A;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-text {
+            color: #FDB71A;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3em; }
+            .section-title { font-size: 2.2em; }
+            .price-value { font-size: 4em; }
+            .timeline::before { left: 30px; }
+            .timeline-item { padding-right: 0; padding-left: 70px; }
+            .timeline-item:nth-child(even) { padding-left: 70px; }
+            .timeline-item::before { left: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2em; }
+            .hero .subtitle { font-size: 1.1em; }
+            .hero-stats { flex-direction: column; gap: 30px; }
+            .section { padding: 60px 20px; }
+            .section-title { font-size: 1.8em; }
+            .floating-btn { bottom: 20px; right: 20px; padding: 15px 25px; font-size: 14px; }
+            .price-value { font-size: 3em; }
+            .logo-container img { margin-top:1rem;height: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Gerando PDF...</div>
+    </div>
+
+    <button class="floating-btn" onclick="generatePDF()">
+        <span>📄</span> Salvar Proposta em PDF
+    </button>
+
+    <div id="proposal">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img src="./logo.jpg" alt="Lacel" onerror="this.style.display='none'">
+                </div>
+                <h1>PROPOSTA <span>COMERCIAL</span></h1>
+                <p class="subtitle">Desenvolvimento do Site Institucional</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">18-25</span>
+                        <span class="stat-label">Páginas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">70+</span>
+                        <span class="stat-label">Dias Entrega</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Gerenciável</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <!-- APRESENTAÇÃO -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-label">Nossa Equipe</div>
+                    <h2 class="section-title">Expertise em Desenvolvimento Web</h2>
+                    <p class="section-description">
+                        Somos especializados em soluções digitais corporativas de alto padrão. Combinamos design estratégico, tecnologia robusta e performance otimizada para entregar plataformas que geram resultados reais.
+                    </p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 50px; border-radius: 20px; text-align: center; border-left: 6px solid #FDB71A;">
+                    <p style="font-size: 1.3em; color: #0a0e27; font-weight: 600; margin-bottom: 20px;">
+                        🌟 Conheça nossa referência de excelência técnica
+                    </p>
+                    <a href="http://hsjeronimo.com.br" target="_blank" style="color: #FDB71A; font-size: 1.5em; font-weight: 700; text-decoration: none; border-bottom: 3px solid #FDB71A; padding-bottom: 5px;">
+                        hsjeronimo.com.br →
+                    </a>
+                </div>
+            </section>
+
+            <!-- ENTENDIMENTO -->
+            <section class="section section-dark">
+                <div class="section-header">
+                    <div class="section-label">Visão do Projeto</div>
+                    <h2 class="section-title">70 Anos de História em Uma Plataforma Digital</h2>
+                    <p class="section-description">
+                        Compreendemos que o Grupo Lacel está em um momento estratégico crucial: traduzir mais de 70 anos de experiência em uma presença digital que reflita autoridade, inovação e liderança no setor fluvial brasileiro.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Posicionamento</h3>
+                        <p class="feature-description">Referência absoluta em engenharia fluvial e soluções integradas no Sul do Brasil</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3 class="feature-title">Visão de Futuro</h3>
+                        <p class="feature-description">Comunicação de robustez técnica, inovação e compromisso ESG</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3 class="feature-title">Atração de Negócios</h3>
+                        <p class="feature-description">Novos clientes e talentos através de narrativa forte e design impactante</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Performance Total</h3>
+                        <p class="feature-description">Experiência excepcional em todos os dispositivos e plataformas</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOLUÇÃO -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-label">Tecnologia</div>
+                    <h2 class="section-title">WordPress Enterprise</h2>
+                    <p class="section-description">
+                        Plataforma robusta, escalável e 100% gerenciável para o Grupo Lacel
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎛️</div>
+                        <h3 class="feature-title">Autonomia Total</h3>
+                        <p class="feature-description">CMS intuitivo com gestão 100% independente. Sua equipe atualiza tudo sem dependência técnica.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Escalabilidade</h3>
+                        <p class="feature-description">Arquitetura preparada para crescimento, novas funcionalidades e integrações futuras.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="feature-title">SEO Elite</h3>
+                        <p class="feature-description">Otimização avançada desde o primeiro dia. Ranqueamento orgânico garantido.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Segurança</h3>
+                        <p class="feature-description">Proteção corporativa, backups automatizados e monitoramento contínuo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ESCOPO -->
+            <section class="section section-gray">
+                <div class="section-header">
+                    <div class="section-label">O Que Está Incluso</div>
+                    <h2 class="section-title">Escopo Completo do Projeto</h2>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">📑 Estrutura do Site</h3>
+                    <div class="includes-grid">
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Home com Hero Visual</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Sobre Nós Completo</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Páginas de Serviços</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Portfólio com Filtros</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Blog Corporativo</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Inovação & Tecnologia</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Sustentabilidade ESG</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Segurança & Certificações</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Seção Hidrovias</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Carreiras</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Contato Completo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 60px;">
+                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">🎨 Design & Experiência</h3>
+                    <div class="includes-grid">
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Design UI/UX Profissional</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Paleta Azul + Amarelo</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Responsividade Total</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Animações Interativas</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Fotografia Profissional</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Iconografia Customizada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">⚙️ Funcionalidades Técnicas</h3>
+                    <div class="includes-grid">
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">WordPress CMS Completo</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">SEO Otimizado</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Google Maps Integrado</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Formulários Inteligentes</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Linha do Tempo Interativa</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Indicadores Visuais</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Performance Otimizada</span>
+                        </div>
+                        <div class="include-item">
+                            <span class="include-check">✓</span>
+                            <span class="include-text">Segurança Avançada</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CRONOGRAMA -->
+            <section class="section section-dark">
+                <div class="section-header">
+                    <div class="section-label">Planejamento</div>
+                    <h2 class="section-title">Cronograma de Entrega</h2>
+                    <p class="section-description">
+                        Processo estruturado em 10 fases para garantir qualidade e entregas pontuais
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 1</div>
+                            <div class="timeline-title">Definições do projeto</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 2</div>
+                            <div class="timeline-title">Criação de wireframes para validar o projeto</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 3</div>
+                            <div class="timeline-title">Desenvolvimento do projeto + validações constantes</div>
+                        </div>
+                    </div>
+                
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 4</div>
+                            <div class="timeline-title">Otimização SEO + Performance</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 5</div>
+                            <div class="timeline-title">Testes + Ajustes + Homologação</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 6</div>
+                            <div class="timeline-title">Treinamento + Documentação</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-phase">Fase 7</div>
+                            <div class="timeline-title">Go Live</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px;">
+                    <p style="font-size: 1.1em; color: #0a0e27; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">Data de Entrega</p>
+                    <p style="font-size: 3em; color: #0a0e27; font-weight: 900; line-height: 1;">20 de Fevereiro de 2025</p>
+                </div>
+            </section>
+
+            <!-- INVESTIMENTO -->
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-label">Investimento</div>
+                    <h2 class="section-title">Valor do Projeto</h2>
+                </div>
+
+                <div class="price-showcase">
+                    <p class="price-label">Investimento Total</p>
+                    <div class="price-value">R$ 5.000</div>
+
+                    <div class="price-features">
+                        <div class="price-feature">
+                            <div class="price-feature-icon">✓</div>
+                            <div class="price-feature-text">Planejamento Completo</div>
+                        </div>
+                       
+                        <div class="price-feature">
+                            <div class="price-feature-icon">✓</div>
+                            <div class="price-feature-text">Desenvolvimento</div>
+                        </div>
+                        <div class="price-feature">
+                            <div class="price-feature-icon">✓</div>
+                            <div class="price-feature-text">SEO Otimizado</div>
+                        </div>
+                        <div class="price-feature">
+                            <div class="price-feature-icon">✓</div>
+                            <div class="price-feature-text">Treinamento</div>
+                        </div>
+                        <div class="price-feature">
+                            <div class="price-feature-icon">✓</div>
+                            <div class="price-feature-text">30 Dias Suporte</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 50px; border-radius: 20px; margin-top: 60px; border-left: 6px solid #0a0e27;">
+                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700; text-align: center;">💳 Forma de Pagamento</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+                        <div style="background: white; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                            <div style="font-size: 3em; color: #FDB71A; font-weight: 900; margin-bottom: 15px;">50%</div>
+                            <div style="font-size: 1.3em; color: #0a0e27; font-weight: 700; margin-bottom: 10px;">R$ 2.500</div>
+                            <div style="color: #666; font-size: 1.1em;">Na Contratação</div>
+                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f8f9fa; color: #888; font-size: 0.95em;">Início imediato dos trabalhos</div>
+                        </div>
+                        <div style="background: white; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                            <div style="font-size: 3em; color: #FDB71A; font-weight: 900; margin-bottom: 15px;">50%</div>
+                            <div style="font-size: 1.3em; color: #0a0e27; font-weight: 700; margin-bottom: 10px;">R$ 2.500</div>
+                            <div style="color: #666; font-size: 1.1em;">Na Entrega Final</div>
+                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f8f9fa; color: #888; font-size: 0.95em;">Após aprovação e Go Live</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        
+            <!-- CTA FINAL -->
+            <section class="section">
+                <div class="cta-section">
+                    <h2 class="cta-title">Vamos Fazer História Juntos</h2>
+                    <p class="cta-description">
+                        O reposicionamento digital do Grupo Lacel é uma oportunidade de consolidar 70 anos de expertise em uma plataforma que comunica liderança, inovação e compromisso com o futuro das hidrovias brasileiras.
+                    </p>
+                    <p class="cta-highlight">
+                        Estamos prontos para transformar este projeto em uma referência no setor fluvial brasileiro.
+                    </p>
+                </div>
+
+             
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-content">
+                <p style="font-size: 1.2em; margin-bottom: 20px;">
+                    <span class="footer-highlight">Proposta Comercial</span> elaborada especialmente para o Grupo Lacel
+                </p>
+                <p>
+                    Desenvolvimento do Site Institucional com WordPress Enterprise
+                </p>
+                <p style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #1a1f3a;">
+                    Termos e condições detalhados serão formalizados em contrato
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generatePDF() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('active');
+            
+            try {
+                const element = document.getElementById('proposal');
+                const button = document.querySelector('.floating-btn');
+                
+                button.style.display = 'none';
+                
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                });
+                
+                button.style.display = 'flex';
+                
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save('Proposta_Comercial_Lacel.pdf');
+                
+            } catch (error) {
+                console.error('Erro ao gerar PDF:', error);
+                alert('Erro ao gerar PDF. Por favor, tente novamente.');
+            } finally {
+                loading.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
