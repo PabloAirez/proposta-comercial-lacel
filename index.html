@@ -53,12 +53,13 @@
         /* HERO SECTION */
         .hero {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 100px 40px 120px;
         }
 
         .hero::before {
@@ -85,7 +86,7 @@
             z-index: 2;
             text-align: center;
             max-width: 1200px;
-            padding: 0 40px;
+            padding: 0;
         }
 
         .logo-container {
@@ -176,6 +177,7 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            z-index: 10;
         }
 
         .scroll-indicator span {
@@ -185,6 +187,7 @@
             border: 2px solid #FDB71A;
             border-radius: 25px;
             position: relative;
+            margin: 0 auto;
         }
 
         .scroll-indicator span::before {
@@ -342,6 +345,8 @@
         .timeline {
             position: relative;
             padding: 40px 0;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .timeline::before {
@@ -358,14 +363,15 @@
         .timeline-item {
             display: flex;
             justify-content: flex-end;
-            padding-right: 50%;
+            padding-right: calc(50% + 30px);
             position: relative;
             margin-bottom: 50px;
+            width: 100%;
         }
 
         .timeline-item:nth-child(even) {
             justify-content: flex-start;
-            padding-left: 50%;
+            padding-left: calc(50% + 30px);
             padding-right: 0;
         }
 
@@ -373,7 +379,8 @@
             background: #1a1f3a;
             padding: 30px;
             border-radius: 15px;
-            width: 90%;
+            width: 100%;
+            max-width: 450px;
             position: relative;
             transition: all 0.3s ease;
         }
@@ -502,32 +509,43 @@
             margin: 60px 0;
         }
 
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
         .include-item {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             transition: all 0.3s ease;
-            border-left: 4px solid #FDB71A;
+            border-left: 5px solid #FDB71A;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .include-item:hover {
             background: #ffffff;
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(253, 183, 26, 0.2);
+            border-left-width: 8px;
         }
 
         .include-check {
-            font-size: 1.5em;
+            font-size: 2em;
             color: #FDB71A;
             font-weight: bold;
+            min-width: 30px;
+            text-align: center;
         }
 
         .include-text {
-            color: #333;
-            font-weight: 600;
+            color: #0a0e27;
+            font-weight: 700;
+            font-size: 1.05em;
         }
 
         /* CTA SECTION */
@@ -649,13 +667,28 @@
             .hero h1 { font-size: 3em; }
             .section-title { font-size: 2.2em; }
             .price-value { font-size: 4em; }
-            .timeline::before { left: 30px; }
-            .timeline-item { padding-right: 0; padding-left: 70px; }
-            .timeline-item:nth-child(even) { padding-left: 70px; }
-            .timeline-item::before { left: 30px; }
+            .timeline { padding: 40px 20px; }
+            .timeline::before { left: 30px; transform: none; }
+            .timeline-item { 
+                padding-right: 0; 
+                padding-left: 70px;
+                justify-content: flex-start;
+            }
+            .timeline-item:nth-child(even) { 
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            .timeline-content {
+                max-width: 100%;
+            }
+            .timeline-item::before { 
+                left: 30px;
+                transform: none;
+            }
         }
 
         @media (max-width: 768px) {
+            .hero { padding: 80px 20px 100px; }
             .hero h1 { font-size: 2em; }
             .hero .subtitle { font-size: 1.1em; }
             .hero-stats { flex-direction: column; gap: 30px; }
@@ -663,7 +696,43 @@
             .section-title { font-size: 1.8em; }
             .floating-btn { bottom: 20px; right: 20px; padding: 15px 25px; font-size: 14px; }
             .price-value { font-size: 3em; }
-            .logo-container img { margin-top:1rem;height: 80px; }
+            .logo-container img { margin-top: 1rem; height: 80px; }
+            .timeline { padding: 40px 10px; }
+            .timeline-item { padding-left: 50px; }
+            .timeline-item:nth-child(even) { padding-left: 50px; }
+            .timeline::before { left: 20px; }
+            .timeline-item::before { left: 20px; }
+            .includes-grid { 
+                grid-template-columns: 1fr; 
+                gap: 15px; 
+            }
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+            .include-item {
+                padding: 20px;
+                font-size: 0.95em;
+            }
+            .include-check {
+                font-size: 1.5em;
+                min-width: 25px;
+            }
+            .include-text {
+                font-size: 1em;
+            }
+            .price-features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .cta-title {
+                font-size: 2em;
+            }
+            .cta-description {
+                font-size: 1.1em;
+            }
+            .cta-highlight {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
@@ -717,13 +786,22 @@
                     </p>
                 </div>
 
-                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 50px; border-radius: 20px; text-align: center; border-left: 6px solid #FDB71A;">
-                    <p style="font-size: 1.3em; color: #0a0e27; font-weight: 600; margin-bottom: 20px;">
-                        🌟 Conheça nossa referência de excelência técnica
-                    </p>
-                    <a href="http://hsjeronimo.com.br" target="_blank" style="color: #FDB71A; font-size: 1.5em; font-weight: 700; text-decoration: none; border-bottom: 3px solid #FDB71A; padding-bottom: 5px;">
-                        hsjeronimo.com.br →
-                    </a>
+                <div style="background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%); padding: 40px 25px; border-radius: 25px; text-align: center; border: 3px solid #FDB71A; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(253, 183, 26, 0.3);">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at top right, rgba(253, 183, 26, 0.1) 0%, transparent 50%);"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="display: inline-block; background: rgba(253, 183, 26, 0.2); padding: 15px 30px; border-radius: 50px; margin-bottom: 25px;">
+                            <span style="font-size: 2.5em;">🌟</span>
+                        </div>
+                        <p style="font-size: clamp(1.1em, 4vw, 1.5em); color: #FDB71A; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; line-height: 1.3;">
+                            Referência de Excelência Técnica
+                        </p>
+                        <p style="font-size: clamp(0.95em, 3vw, 1.1em); color: #a0a0a0; margin-bottom: 30px; line-height: 1.6;">
+                            Conheça um projeto desenvolvido por nossa equipe que representa o padrão de qualidade que entregaremos ao Grupo Lacel
+                        </p>
+                        <a href="http://hsjeronimo.com.br" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%); color: #0a0e27; font-size: clamp(1em, 3.5vw, 1.3em); font-weight: 900; text-decoration: none; padding: 18px 35px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(253, 183, 26, 0.4); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 20px 50px rgba(253, 183, 26, 0.6)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(253, 183, 26, 0.4)'">
+                            Visitar hsjeronimo.com.br →
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -800,10 +878,21 @@
                 <div class="section-header">
                     <div class="section-label">O Que Está Incluso</div>
                     <h2 class="section-title">Escopo Completo do Projeto</h2>
+                    <p class="section-description">
+                        Uma solução completa e integrada, do planejamento à entrega final
+                    </p>
                 </div>
 
-                <div style="margin-bottom: 60px;">
-                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">📑 Estrutura do Site</h3>
+                <div style="margin-bottom: 80px;">
+                    <div style="background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%); padding: 40px 30px; border-radius: 25px; margin-bottom: 40px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(10, 14, 39, 0.4); border: 2px solid #FDB71A;">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 48%, rgba(253, 183, 26, 0.05) 49%, rgba(253, 183, 26, 0.05) 51%, transparent 52%); background-size: 30px 30px;"></div>
+                        <div style="position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(253, 183, 26, 0.15) 0%, transparent 70%); border-radius: 50%;"></div>
+                        <div style="display: inline-block; background: rgba(253, 183, 26, 0.2); padding: 12px 30px; border-radius: 50px; margin-bottom: 20px; position: relative; z-index: 1;">
+                            <span style="font-size: 2em;">📑</span>
+                        </div>
+                        <h3 style="font-size: clamp(1.8em, 5vw, 2.8em); color: #FDB71A; margin-bottom: 15px; font-weight: 900; position: relative; z-index: 1; text-shadow: 0 2px 20px rgba(253, 183, 26, 0.3);">Estrutura do Site</h3>
+                        <p style="color: #a0a0a0; font-size: clamp(0.95em, 3vw, 1.15em); position: relative; z-index: 1; line-height: 1.7; max-width: 700px; margin: 0 auto;">18-25 páginas estratégicas para comunicar toda a expertise do Grupo Lacel</p>
+                    </div>
                     <div class="includes-grid">
                         <div class="include-item">
                             <span class="include-check">✓</span>
@@ -852,8 +941,11 @@
                     </div>
                 </div>
 
-                <div style="margin-bottom: 60px;">
-                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">🎨 Design & Experiência</h3>
+                <div style="margin-bottom: 80px;">
+                    <div style="background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%); padding: 30px 25px; border-radius: 20px; margin-bottom: 40px; text-align: center;">
+                        <h3 style="font-size: clamp(1.5em, 5vw, 2.5em); color: #0a0e27; margin-bottom: 15px; font-weight: 900;">🎨 Design & Experiência</h3>
+                        <p style="color: #0a0e27; font-size: clamp(0.95em, 3vw, 1.1em); font-weight: 600; line-height: 1.6;">Interface moderna que eleva a percepção de marca do Grupo Lacel</p>
+                    </div>
                     <div class="includes-grid">
                         <div class="include-item">
                             <span class="include-check">✓</span>
@@ -883,7 +975,10 @@
                 </div>
 
                 <div>
-                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700;">⚙️ Funcionalidades Técnicas</h3>
+                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px 25px; border-radius: 20px; margin-bottom: 40px; text-align: center; border: 3px solid #0a0e27;">
+                        <h3 style="font-size: clamp(1.5em, 5vw, 2.5em); color: #0a0e27; margin-bottom: 15px; font-weight: 900;">⚙️ Funcionalidades Técnicas</h3>
+                        <p style="color: #666; font-size: clamp(0.95em, 3vw, 1.1em); font-weight: 600; line-height: 1.6;">Tecnologia de ponta para máxima performance e resultados</p>
+                    </div>
                     <div class="includes-grid">
                         <div class="include-item">
                             <span class="include-check">✓</span>
@@ -927,7 +1022,7 @@
                     <div class="section-label">Planejamento</div>
                     <h2 class="section-title">Cronograma de Entrega</h2>
                     <p class="section-description">
-                        Processo estruturado em 10 fases para garantir qualidade e entregas pontuais
+                        Processo estruturado em 7 fases para garantir qualidade e entregas pontuais
                     </p>
                 </div>
 
@@ -950,8 +1045,6 @@
                             <div class="timeline-title">Desenvolvimento do projeto + validações constantes</div>
                         </div>
                     </div>
-                
-
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <div class="timeline-phase">Fase 4</div>
@@ -989,18 +1082,21 @@
                 <div class="section-header">
                     <div class="section-label">Investimento</div>
                     <h2 class="section-title">Valor do Projeto</h2>
+                    <p class="section-description">
+                        Um investimento estratégico para consolidar a presença digital do Grupo Lacel
+                    </p>
                 </div>
 
                 <div class="price-showcase">
                     <p class="price-label">Investimento Total</p>
                     <div class="price-value">R$ 5.000</div>
+                    <p style="font-size: 1.2em; color: #0a0e27; font-weight: 600; margin-top: 10px; position: relative; z-index: 1;">Pagamento facilitado em 2x sem juros</p>
 
                     <div class="price-features">
                         <div class="price-feature">
                             <div class="price-feature-icon">✓</div>
                             <div class="price-feature-text">Planejamento Completo</div>
                         </div>
-                       
                         <div class="price-feature">
                             <div class="price-feature-icon">✓</div>
                             <div class="price-feature-text">Desenvolvimento</div>
@@ -1020,29 +1116,43 @@
                     </div>
                 </div>
 
-                <div style="background: #f8f9fa; padding: 50px; margin:20px; border-radius: 20px; margin-top: 60px; border-left: 6px solid #0a0e27;">
-                    <h3 style="font-size: 2em; color: #0a0e27; margin-bottom: 30px; font-weight: 700; text-align: center;">💳 Forma de Pagamento</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
-                        <div style="background: white; padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                            <div style="font-size: 3em; color: #FDB71A; font-weight: 900; margin-bottom: 15px;">50%</div>
-                            <div style="font-size: 1.3em; color: #0a0e27; font-weight: 700; margin-bottom: 10px;">R$ 2.500</div>
-                            <div style="color: #666; font-size: 1.1em;">Na Contratação</div>
-                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f8f9fa; color: #888; font-size: 0.95em;">Início imediato dos trabalhos</div>
+                <div style="background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%); padding: 40px 25px; border-radius: 25px; margin-top: 60px; border: 3px solid #FDB71A; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 48%, rgba(253, 183, 26, 0.03) 49%, rgba(253, 183, 26, 0.03) 51%, transparent 52%); background-size: 30px 30px;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="display: inline-block; background: rgba(253, 183, 26, 0.2); padding: 10px 20px; border-radius: 50px; margin-bottom: 20px;">
+                                <span style="color: #FDB71A; font-weight: 700; font-size: clamp(0.9em, 3vw, 1.1em); text-transform: uppercase; letter-spacing: 2px;">💳 Condições de Pagamento</span>
+                            </div>
+                            <h3 style="font-size: clamp(1.5em, 5vw, 2.5em); color: #ffffff; font-weight: 900; line-height: 1.3;">Facilidade para começar agora</h3>
                         </div>
-                        <div style="background: white; padding: 40px;margin:20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                            <div style="font-size: 3em; color: #FDB71A; font-weight: 900; margin-bottom: 15px;">50%</div>
-                            <div style="font-size: 1.3em; color: #0a0e27; font-weight: 700; margin-bottom: 10px;">R$ 2.500</div>
-                            <div style="color: #666; font-size: 1.1em;">Na Entrega Final</div>
-                            <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f8f9fa; color: #888; font-size: 0.95em;">Após aprovação e Go Live</div>
+                        <div class="payment-grid">
+                            <div style="background: linear-gradient(135deg, #FDB71A 0%, #f59e0b 100%); padding: 35px 25px; border-radius: 20px; text-align: center; box-shadow: 0 15px 40px rgba(253, 183, 26, 0.4); border: 3px solid #ffffff;">
+                                <div style="font-size: clamp(0.9em, 3vw, 1.2em); color: #0a0e27; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">1ª Parcela</div>
+                                <div style="font-size: clamp(2.5em, 10vw, 4em); color: #0a0e27; font-weight: 900; margin-bottom: 10px; line-height: 1;">50%</div>
+                                <div style="font-size: clamp(1.5em, 6vw, 2em); color: #0a0e27; font-weight: 900; margin-bottom: 15px;">R$ 2.500</div>
+                                <div style="background: rgba(10, 14, 39, 0.2); height: 2px; width: 60px; margin: 20px auto;"></div>
+                                <div style="color: #0a0e27; font-size: clamp(1em, 4vw, 1.2em); font-weight: 700; margin-bottom: 10px;">Na Contratação</div>
+                                <div style="color: #0a0e27; font-size: clamp(0.85em, 3vw, 0.95em); font-weight: 600; opacity: 0.8;">Início imediato do projeto</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.05); padding: 35px 25px; border-radius: 20px; text-align: center; border: 2px solid #FDB71A; backdrop-filter: blur(10px);">
+                                <div style="font-size: clamp(0.9em, 3vw, 1.2em); color: #FDB71A; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">2ª Parcela</div>
+                                <div style="font-size: clamp(2.5em, 10vw, 4em); color: #ffffff; font-weight: 900; margin-bottom: 10px; line-height: 1;">50%</div>
+                                <div style="font-size: clamp(1.5em, 6vw, 2em); color: #ffffff; font-weight: 900; margin-bottom: 15px;">R$ 2.500</div>
+                                <div style="background: rgba(253, 183, 26, 0.3); height: 2px; width: 60px; margin: 20px auto;"></div>
+                                <div style="color: #ffffff; font-size: clamp(1em, 4vw, 1.2em); font-weight: 700; margin-bottom: 10px;">Na Entrega</div>
+                                <div style="color: #a0a0a0; font-size: clamp(0.85em, 3vw, 0.95em); font-weight: 600;">Após aprovação e Go Live</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(253, 183, 26, 0.1); border-radius: 15px; border: 2px dashed #FDB71A;">
+                            <p style="color: #FDB71A; font-size: clamp(0.9em, 3vw, 1.1em); font-weight: 700; line-height: 1.6;">✓ Sem juros<br>✓ Pagamento simplificado<br>✓ Contrato transparente</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-        
             <!-- CTA FINAL -->
             <section class="section">
-                <div class="cta-section section">
+                <div class="cta-section">
                     <h2 class="cta-title">Vamos Fazer História Juntos</h2>
                     <p class="cta-description">
                         O reposicionamento digital do Grupo Lacel é uma oportunidade de consolidar 70 anos de expertise em uma plataforma que comunica liderança, inovação e compromisso com o futuro das hidrovias brasileiras.
@@ -1051,8 +1161,6 @@
                         Estamos prontos para transformar este projeto em uma referência no setor fluvial brasileiro.
                     </p>
                 </div>
-
-             
             </section>
         </div>
 
